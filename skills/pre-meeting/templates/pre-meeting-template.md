@@ -1,76 +1,112 @@
-# [Client Household Name] — [Timeframe] Review Prep
-**Meeting:** [date / time / location or Zoom] · **Prepared:** [date] · **Advisor:** [name]
+# [Client Household Name] — [Annual / Ongoing / Ad hoc] Review Prep
+**Meeting:** [date / time / location or video call] · **Prepared:** [DD/MM/YYYY] · **Adviser:** [name] · **Paraplanner:** [name, if any]
 
 ---
 
 ## 1. Client Snapshot
 | | |
 |---|---|
-| Household | [names, ages] |
-| Client since | [year] · Last review: [date] |
-| Total AUM | $[X] across [N] accounts |
-| Risk profile / IPS target | [e.g., Moderate Growth — 70/30] |
+| Household | [names, ages — DOB-derived] |
+| Client since | [year] · Last review: [DD/MM/YYYY] · Next review due: [date or "— pending back office"] |
+| Total under advice | £[X] across [N] wrappers ([SIPP / personal pension / ISA / GIA / bond]) |
+| Attitude to risk | [e.g., 5 of 7 — Balanced] · last assessed [DD/MM/YYYY] ([tool, if recorded]) |
+| Capacity for loss | [as recorded] · last assessed [DD/MM/YYYY] |
+| Ongoing service | [agreed service level / proposition] · ongoing adviser charge [as agreed] |
+| Milestones ahead | [e.g., reaches 55 on [date] (57 from 6 April 2028 — check); State Pension age [date]; [scheme] NRA [date]; 75 on [date]] |
 
 ## 2. Relationship Signals
-**Concerns:** [anything suggesting concern or dissatisfaction — or "none noted"] (source: [Zocks meeting date/ID or CRM field])
+**Concerns:** [anything suggesting concern or dissatisfaction — or "none noted"] (source: [Zocks meeting date/ID or back-office field])
 
-**Life events / upcoming personal dates:** [birthdays, anniversaries, family milestones, health, job change, home purchase — or "none noted"] (source: [...])
+**Life events / upcoming personal dates:** [birthdays, anniversaries, family milestones, health, retirement date, redundancy, house move — or "none noted"] (source: [...])
 
-**Proactive talking points (personal):** [e.g., "kid swimming for Stanford — ask about the meet"] (source: [...])
+**Possible vulnerability indicators — for the adviser to consider:** [each indicator with its FG21/1 driver (health / life events / resilience / capability) and source, e.g. "Life events: bereavement mentioned (Zocks, 12/02/2026)" — or "none noted in the sources read"] *(Flags only. Never state that the client is vulnerable.)*
+
+**Proactive talking points (personal):** [e.g., "daughter starting university in September — ask how the move went"] (source: [...])
 
 ## 3. Since We Last Met
 **Open action items from last meeting:**
 
 | Action | Assignee | Status |
 |---|---|---|
-| [item] | [advisor / client] | [unknown — pending CRM, unless CRM confirms done] |
+| [item] | [adviser / paraplanner / client] | [unknown — pending back office, unless the back office confirms done] |
 
 **Notable correspondence (last [timeframe-appropriate window]):**
-- [date] — [summary; any open request]
+- [DD/MM/YYYY] — [summary; any open request]
 
-## 4. Portfolio Review
-**Performance (net of fees):**
+## 4. Pensions & Portfolio Review
+**Wrappers** (per [platform], valued [DD/MM/YYYY]):
 
-| | QTD | YTD | 1-Yr | 3-Yr | Since Inception |
+| Wrapper | Provider / platform | Value | Crystallised | Uncrystallised | Note |
 |---|---|---|---|---|---|
-| Household | | | | | |
-| Blended benchmark | | | | | |
-| +/- | | | | | |
+| SIPP | | £ | £ | £ | |
+| ISA | | £ | — | — | |
+| | | | | | |
+
+**Performance (net of all charges):**
+
+| | 1-Yr | 3-Yr | 5-Yr | Since start of advice |
+|---|---|---|---|---|
+| Household | | | | |
+| Benchmark / model | | | | |
+| +/- | | | | |
 
 **Drivers:** Top contributors: [ ] · Top detractors: [ ]
 
-**Allocation vs. target:**
+**Allocation vs. risk-profile model:**
 
-| Asset Class | Target | Current | Drift | Note |
+| Asset Class | Model | Current | Drift | Note |
 |---|---|---|---|---|
 | | | | | |
 
+**Drawdown income:** £[gross] [monthly / quarterly / annual] from [wrapper] · ad hoc withdrawals this period: [ ] · vs. income assumed at last review / in the plan: [£ or "— pending"]
+
+**Contributions this period:** personal £[ ] ([relief at source / net pay / salary sacrifice]) · employer £[ ] · other £[ ]
+
+**Workplace and held-away pensions:**
+
+| Scheme | Type | Status | Value / benefit | Statement date |
+|---|---|---|---|---|
+| [scheme] | [DC / DB] | [active / deferred] | [£ value, or £[X] p.a. at NRA [age]] | [DD/MM/YYYY or "no statement on file"] |
+
 **Cash & flows:** [cash %, large deposits/withdrawals this period]
 
-**Alts held away:** [N positions matching [household], per iCapital/Addepar — not in AUM/drift above; see /alts-brief] · check failed: [not checked — run /alts-brief if the household holds alts] · *(no platform connected, or zero matches → omit this line, never "pending")*
+## 5. Planning Points to Discuss
+- [ ] Annual allowance: used this tax year £[ ] · carry-forward headroom [from figures on file, or "figures missing for [tax year] — not calculated"]
+- [ ] MPAA: [triggered on [date] / not triggered / unknown — pending [source]]
+- [ ] Tax-free cash / crystallisation timing: [uncrystallised £, stated plans]
+- [ ] Drawdown sustainability: [cashflow headline as reported] → run `/retirement-income-review`
+- [ ] State Pension: forecast [£ p.w., dated DD/MM/YYYY, or "none on file"] · State Pension age [date]
+- [ ] Deferred DB benefits: [scheme, benefit at NRA]
+- [ ] Consolidation questions: [old pots / safeguarded benefits noted] → `/pension-transfer-check`
+- [ ] Expression of wish / nominations: last updated [date] · April 2027 pensions-IHT change → `/death-benefits-and-tax-brief`
+- [ ] ISA allowance used this tax year: £[ ]
+- [ ] Protection gaps: [as noted]
+- [ ] LPA / will: [status and date, as recorded]
 
-## 5. Planning Opportunities
-- [ ] Rebalance: [yes/no — which accounts]
-- [ ] Tax-loss harvesting: [candidates]
-- [ ] Roth conversion window: [analysis]
-- [ ] RMD / QCD planning: [if applicable]
-- [ ] 529 funding: [status / opportunity]
-- [ ] Beneficiary & estate doc review: [last verified date]
-- [ ] Insurance / liability gaps: [notes]
+**Cashflow snapshot** ([Voyant / CashCalc / Truth / Timeline], plan last updated [DD/MM/YYYY]): [headline sustainability output exactly as the tool reports it] · Assumptions: [as stated by the tool] · Goals / income target: [as recorded]
 
-**Plan snapshot** (MoneyGuide, plan last updated [date]): Net worth $[total] — $[assets] assets, $[liabilities] liabilities · Probability of success [X.X]% · Goals: [name — $[initial expense], starting [year]]
+*(Figures exactly as the cashflow tool returned them, never recomputed and never turned into a probability or "funded" figure the tool didn't state. No plan on file → "not applicable — no cashflow plan on file", never zero and never left out.)*
 
-*(Figures exactly as MoneyGuide returned them, never recomputed. No plan on file → net worth only; probability of success and goals read "not applicable — no plan on file", never 0% and never left out.)*
+## 6. Ongoing Service & Consumer Duty Evidence
+| Service promised (per agreement) | Delivered this year? | Evidence |
+|---|---|---|
+| [e.g., annual review meeting] | [yes / no / no record] | [source and date, or "— no evidence found"] |
+| [e.g., annual valuation] | | |
 
-## 6. Proposed Agenda (40 min)
-1. Welcome & life updates — 5 min
-2. Markets in plain English — 5 min
-3. Your portfolio: performance & positioning — 10 min
-4. Planning opportunities — 10 min
-5. Recommendations & decisions needed — 5 min
-6. Action items & next meeting — 5 min
+**Charges paid this period:** platform £[ ] · funds (OCF) [ ] · ongoing adviser charge £[ ] · DFM [ ] (per [platform])
 
-## 7. Talking Points & Anticipated Questions
+**Fair-value talking points:** [what the client received for the charges; any gap to address openly]
+
+## 7. Proposed Agenda (50 min)
+1. Welcome, life updates and any changes in circumstances — 5 min
+2. Objectives, attitude to risk and capacity for loss — still right? — 10 min
+3. Markets in plain English — 5 min
+4. Your pensions and investments: performance, charges and positioning — 10 min
+5. Retirement income and planning points — 10 min
+6. Your service this year and what's next — 5 min
+7. Action items and next review — 5 min
+
+## 8. Talking Points & Anticipated Questions
 **Talking points:**
 1. [plain-English point]
 
@@ -81,10 +117,10 @@
 **Likely questions & framing:**
 - *"[Anticipated question]"* → [suggested honest framing]
 
-## 8. Action Items (draft — confirm in meeting)
+## 9. Action Items (draft — confirm in meeting)
 | # | Action | Owner | Due |
 |---|---|---|---|
 | 1 | | | |
 
 ---
-*Prepared with Claude for Financial Advisors. For internal use; run client-facing excerpts through /compliance before sharing.*
+*Prepared with Pensions Adviser (UK). For internal use; run client-facing excerpts through /compliance before sharing.*

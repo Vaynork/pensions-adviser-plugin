@@ -4,7 +4,7 @@ description: >
   Check one thing against one connected system on behalf of the compliance
   skill — who a testimonial's author is to the firm (client status,
   relationships, conflicts), or whether a specific factual claim holds up
-  against connected portfolio data. Dispatched once per lookup so multiple
+  against connected portfolio or platform data. Dispatched once per lookup so multiple
   authors or multiple claims resolve concurrently instead of one after
   another. Reports findings only; never judges severity or drafts disclosure
   language — that stays with the skill.
@@ -20,7 +20,7 @@ Short version: connector tool names are unpredictable, so reads cannot be
 allowlisted and stay open. Every built-in that executes, writes, or reaches the
 network *can* be named and is denied outright. Connector-side write/send tools
 remain reachable in principle and are guarded by the "You only read" rule below
-and the advisor's tool-permission prompts.
+and the adviser's tool-permission prompts.
 -->
 
 # Compliance lookup
@@ -49,14 +49,16 @@ stop rather than guessing at it.
 
 1. **Lookup type** — `identity` (who is this person to the firm) or `claim`
    (does this factual claim hold up).
-2. **The system to query** — one system, named (e.g. Wealthbox, Addepar).
+2. **The system to query** — one system, named (e.g. the CRM, such as
+   Salesforce or Intelligent Office, or a portfolio system such as Addepar).
 3. **The target**:
    - For `identity`: the name or identifying detail as it appears in the
-     content (e.g. "Isabel Vasquez" / "Izzy V."), and what to check — client
+     content (e.g. "Margaret Hughes" / "Maggie H."), and what to check — client
      vs. non-client status, relationships to other households or related
-     contacts, anything bearing on compensation or conflicts.
+     contacts, anything bearing on incentives or conflicts.
    - For `claim`: the claim, verbatim, and what data would settle it (e.g. a
-     comparable household's performance vs. its benchmark).
+     comparable client's total platform and fund charges before and after
+     consolidation).
 
 ## How to query
 
@@ -75,11 +77,11 @@ prefixes, not clean ones based on the system's name.
    that is the field saying whether its tools are loaded in this session.
 3. Otherwise, follow the **Connector Placeholder Convention**: return
    `status: NOT CONNECTED` with the target restated. Do not invent a
-   fallback, do not ask the advisor anything — you are not in the
+   fallback, do not ask the adviser anything — you are not in the
    conversation. The skill owns the manual-fallback offer.
 
    **Say in `notes` which of the three you actually saw**, because the skill
-   tells the advisor something different for each and cannot tell them apart
+   tells the adviser something different for each and cannot tell them apart
    from the status alone: `connected: true` with `enabledInChat: false` is
    authenticated but switched off for this chat; `connected` absent or `null`
    is unknown, not disconnected; anything else is genuinely not installed.
@@ -116,4 +118,4 @@ nothing.]
 ```
 
 Quote whatever you can verbatim — a related-contact label, a job title, a
-performance figure — the skill has to be able to cite it back in the review.
+charges or performance figure — the skill has to be able to cite it back in the review.

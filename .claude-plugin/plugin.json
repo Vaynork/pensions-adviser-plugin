@@ -1,9 +1,11 @@
 {
-  "name": "claude-for-financial-advisors",
-  "displayName": "Claude for Financial Advisors",
-  "version": "1.0.0",
-  "description": "Ready-to-run workflows for financial advisors in Claude Cowork, drawing live data from the tools their firm already uses through third-party connectors. The plugin holds no client data, and the advisor approves any write back to an external system. Claude gathers, organizes, summarizes, compares and presents information, while the advisor exercises judgment, makes the recommendation and gives the advice. For financial professional use only; not investment, legal, or tax advice.",
+  "name": "pensions-adviser",
+  "displayName": "Pensions Adviser (UK)",
+  "version": "0.1.0",
+  "description": "Unofficial UK adaptation of Anthropic's Claude for Financial Advisors plugin, reworked for FCA-authorised pensions and retirement advisers and paraplanners: annual review prep, meeting write-ups, FCA financial-promotion and Consumer Duty pre-checks, pension statement intake, pension transfer fact-finding with safeguarded-benefit and scam flags, retirement income (drawdown) reviews, portfolio reviews, and death-benefit and allowances briefs. It holds no client data, and the adviser approves any write back to an external system. Claude gathers, organises, summarises and compares; the adviser exercises judgement and gives the advice. For use by professionals at FCA-authorised firms only; not financial, tax, legal or regulated advice. Not affiliated with or endorsed by Anthropic.",
   "author": {
-    "name": "Anthropic"
-  }
+    "name": "Vaynork"
+  },
+  "homepage": "https://github.com/Vaynork/pensions-adviser-plugin",
+  "license": "Apache-2.0"
 }

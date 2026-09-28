@@ -1,0 +1,17 @@
+Pensions Adviser (UK)
+Copyright 2026 Vaynork
+
+This product is a modified version of "Claude for Financial Advisors"
+(https://github.com/anthropics/claude-for-financial-advisors),
+Copyright 2026 Anthropic PBC, licensed under the Apache License, Version 2.0.
+
+Modifications (September 2026): the plugin has been renamed and re-scoped for
+UK pensions and retirement advisers. The US regulatory content (SEC, FINRA,
+Reg BI) has been replaced with FCA and UK tax content. US-specific connectors
+have been removed. The alts-brief and estate-and-tax-brief skills and the
+titling-compare agent have been removed or replaced. The
+retirement-income-review, pension-transfer-check and
+death-benefits-and-tax-brief skills and the nomination-compare agent are new.
+All remaining skills, agents and documentation have been edited for the UK.
+
+This project is not affiliated with, endorsed by or supported by Anthropic.
