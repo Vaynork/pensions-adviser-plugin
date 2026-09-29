@@ -1,0 +1,1519 @@
+{
+  "schema_format": "pensions-adviser/fact-find-schema@1",
+  "firm": "Pensions Adviser (UK) — generic default",
+  "name": "UK pensions and retirement fact-find (default)",
+  "version": "2026-09-29",
+  "status": "draft",
+  "approved_by": "",
+  "source": {
+    "type": "default",
+    "file": "",
+    "notes": "Generic structure shipped with the plugin. Not any firm's approved fact-find — run /fact-find-setup to use your own."
+  },
+  "clients": [
+    "client1",
+    "client2"
+  ],
+  "sections": [
+    {
+      "id": "meeting",
+      "title": "About this meeting",
+      "repeat": "once",
+      "fields": [
+        {
+          "id": "meeting_date",
+          "label": "Date of fact-find meeting",
+          "type": "date",
+          "canonical": "meta.meeting_date",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "adviser"
+        },
+        {
+          "id": "meeting_type",
+          "label": "Meeting type",
+          "type": "enum",
+          "canonical": "meta.meeting_type",
+          "required": true,
+          "options": [
+            "Face to face",
+            "Video",
+            "Telephone"
+          ],
+          "special_category": false,
+          "source_hint": "adviser"
+        },
+        {
+          "id": "others_present",
+          "label": "Others present",
+          "type": "text",
+          "canonical": "meta.others_present",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "adviser_name",
+          "label": "Adviser",
+          "type": "text",
+          "canonical": "adviser.name",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "adviser"
+        }
+      ]
+    },
+    {
+      "id": "personal",
+      "title": "Personal details",
+      "repeat": "per_client",
+      "fields": [
+        {
+          "id": "title",
+          "label": "Title",
+          "type": "text",
+          "canonical": "person.title",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "forenames",
+          "label": "Forename(s)",
+          "type": "text",
+          "canonical": "person.forenames",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "surname",
+          "label": "Surname",
+          "type": "text",
+          "canonical": "person.surname",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "previous_names",
+          "label": "Previous names",
+          "type": "text",
+          "canonical": "person.previous_names",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "dob",
+          "label": "Date of birth",
+          "type": "date",
+          "canonical": "person.dob",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "ni_number",
+          "label": "National Insurance number",
+          "type": "text",
+          "canonical": "person.ni_number",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "marital_status",
+          "label": "Marital or civil partnership status",
+          "type": "enum",
+          "canonical": "person.marital_status",
+          "required": true,
+          "options": [
+            "Single",
+            "Married",
+            "Civil partnership",
+            "Cohabiting",
+            "Separated",
+            "Divorced",
+            "Widowed"
+          ],
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "nationality",
+          "label": "Nationality",
+          "type": "text",
+          "canonical": "person.nationality",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "tax_residence",
+          "label": "Country of tax residence",
+          "type": "text",
+          "canonical": "person.tax_residence",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "domicile",
+          "label": "Domicile",
+          "type": "text",
+          "canonical": "person.domicile",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "address",
+          "label": "Address",
+          "type": "long_text",
+          "canonical": "person.address",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "postcode",
+          "label": "Postcode",
+          "type": "text",
+          "canonical": "person.postcode",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "phone",
+          "label": "Telephone",
+          "type": "text",
+          "canonical": "person.phone",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "crm"
+        },
+        {
+          "id": "email",
+          "label": "Email",
+          "type": "text",
+          "canonical": "person.email",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "crm"
+        },
+        {
+          "id": "contact_preference",
+          "label": "Preferred contact method",
+          "type": "text",
+          "canonical": "person.contact_preference",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        }
+      ]
+    },
+    {
+      "id": "health",
+      "title": "Health",
+      "repeat": "per_client",
+      "fields": [
+        {
+          "id": "state_of_health",
+          "label": "State of health",
+          "type": "enum",
+          "canonical": "health.state",
+          "required": false,
+          "options": [
+            "Good",
+            "Fair",
+            "Poor"
+          ],
+          "special_category": true,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "conditions",
+          "label": "Medical conditions or medication",
+          "type": "long_text",
+          "canonical": "health.conditions",
+          "required": false,
+          "options": null,
+          "special_category": true,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "smoker",
+          "label": "Smoker (in the last 12 months)",
+          "type": "boolean",
+          "canonical": "health.smoker",
+          "required": false,
+          "options": null,
+          "special_category": true,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "enhanced_annuity_notes",
+          "label": "Anything that might affect life expectancy or annuity rates",
+          "type": "long_text",
+          "canonical": "health.life_expectancy_notes",
+          "required": false,
+          "options": null,
+          "special_category": true,
+          "source_hint": "conversation"
+        }
+      ]
+    },
+    {
+      "id": "vulnerability",
+      "title": "Circumstances and support needs",
+      "repeat": "per_client",
+      "fields": [
+        {
+          "id": "indicators",
+          "label": "Possible vulnerability indicators noted (for the adviser to assess)",
+          "type": "long_text",
+          "canonical": "vulnerability.indicators",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "support_needs",
+          "label": "Support or adjustments requested",
+          "type": "long_text",
+          "canonical": "vulnerability.support_needs",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "trusted_contact",
+          "label": "Trusted contact or attorney",
+          "type": "text",
+          "canonical": "vulnerability.third_party",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        }
+      ]
+    },
+    {
+      "id": "dependants",
+      "title": "Dependants",
+      "repeat": "per_item",
+      "fields": [
+        {
+          "id": "name",
+          "label": "Name",
+          "type": "text",
+          "canonical": "dependant.name",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "relationship",
+          "label": "Relationship",
+          "type": "text",
+          "canonical": "dependant.relationship",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "dob",
+          "label": "Date of birth",
+          "type": "date",
+          "canonical": "dependant.dob",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "financially_dependent",
+          "label": "Financially dependent",
+          "type": "boolean",
+          "canonical": "dependant.financially_dependent",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "until",
+          "label": "Dependent until",
+          "type": "text",
+          "canonical": "dependant.dependent_until",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        }
+      ]
+    },
+    {
+      "id": "employment",
+      "title": "Employment and income",
+      "repeat": "per_client",
+      "fields": [
+        {
+          "id": "status",
+          "label": "Employment status",
+          "type": "enum",
+          "canonical": "employment.status",
+          "required": true,
+          "options": [
+            "Employed",
+            "Self-employed",
+            "Company director",
+            "Retired",
+            "Not working"
+          ],
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "occupation",
+          "label": "Occupation",
+          "type": "text",
+          "canonical": "employment.occupation",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "employer",
+          "label": "Employer or business",
+          "type": "text",
+          "canonical": "employment.employer",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "retirement_age",
+          "label": "Intended retirement age",
+          "type": "number",
+          "canonical": "employment.intended_retirement_age",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "gross_salary",
+          "label": "Gross annual salary",
+          "type": "currency",
+          "canonical": "income.gross_salary",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "bonus",
+          "label": "Bonus, commission or overtime",
+          "type": "currency",
+          "canonical": "income.bonus",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "business_income",
+          "label": "Self-employed profit or dividends",
+          "type": "currency",
+          "canonical": "income.self_employed_profit",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "rental",
+          "label": "Rental income",
+          "type": "currency",
+          "canonical": "income.rental",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "pension_income",
+          "label": "Pension income in payment",
+          "type": "currency",
+          "canonical": "income.pension_income",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "state_pension",
+          "label": "State Pension in payment",
+          "type": "currency",
+          "canonical": "income.state_pension",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "other_income",
+          "label": "Other income",
+          "type": "currency",
+          "canonical": "income.other",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "tax_rate",
+          "label": "Highest rate of income tax",
+          "type": "enum",
+          "canonical": "income.tax_rate",
+          "required": true,
+          "options": [
+            "Non-taxpayer",
+            "Basic",
+            "Higher",
+            "Additional",
+            "Scottish intermediate or above"
+          ],
+          "special_category": false,
+          "source_hint": "conversation"
+        }
+      ]
+    },
+    {
+      "id": "expenditure",
+      "title": "Household expenditure",
+      "repeat": "once",
+      "fields": [
+        {
+          "id": "essential",
+          "label": "Essential monthly outgoings",
+          "type": "currency",
+          "canonical": "expenditure.essential_monthly",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "discretionary",
+          "label": "Discretionary monthly outgoings",
+          "type": "currency",
+          "canonical": "expenditure.discretionary_monthly",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "changes",
+          "label": "Expected changes to spending",
+          "type": "long_text",
+          "canonical": "expenditure.planned_changes",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "emergency_fund",
+          "label": "Emergency fund held or wanted",
+          "type": "currency",
+          "canonical": "expenditure.emergency_fund",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        }
+      ]
+    },
+    {
+      "id": "property",
+      "title": "Property",
+      "repeat": "per_item",
+      "fields": [
+        {
+          "id": "description",
+          "label": "Property",
+          "type": "text",
+          "canonical": "property.description",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "owner",
+          "label": "Owner(s) and tenure",
+          "type": "text",
+          "canonical": "property.owner",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "value",
+          "label": "Estimated value",
+          "type": "currency",
+          "canonical": "property.value",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "value_date",
+          "label": "Valuation date",
+          "type": "date",
+          "canonical": "property.value_date",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        }
+      ]
+    },
+    {
+      "id": "liabilities",
+      "title": "Mortgages and other borrowing",
+      "repeat": "per_item",
+      "fields": [
+        {
+          "id": "type",
+          "label": "Type",
+          "type": "enum",
+          "canonical": "liability.type",
+          "required": true,
+          "options": [
+            "Mortgage",
+            "Loan",
+            "Credit card",
+            "Other"
+          ],
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "lender",
+          "label": "Lender",
+          "type": "text",
+          "canonical": "liability.lender",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "owner",
+          "label": "Borrower(s)",
+          "type": "text",
+          "canonical": "liability.owner",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "balance",
+          "label": "Outstanding balance",
+          "type": "currency",
+          "canonical": "liability.balance",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "payment",
+          "label": "Monthly payment",
+          "type": "currency",
+          "canonical": "liability.monthly_payment",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "rate",
+          "label": "Interest rate",
+          "type": "percentage",
+          "canonical": "liability.rate",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "end_date",
+          "label": "End date",
+          "type": "date",
+          "canonical": "liability.end_date",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "repayment_type",
+          "label": "Repayment or interest-only",
+          "type": "enum",
+          "canonical": "liability.repayment_type",
+          "required": false,
+          "options": [
+            "Repayment",
+            "Interest-only",
+            "Part and part"
+          ],
+          "special_category": false,
+          "source_hint": "document"
+        }
+      ]
+    },
+    {
+      "id": "investments",
+      "title": "Cash, savings and investments",
+      "repeat": "per_item",
+      "fields": [
+        {
+          "id": "type",
+          "label": "Type",
+          "type": "enum",
+          "canonical": "investment.type",
+          "required": true,
+          "options": [
+            "Cash",
+            "Cash ISA",
+            "Stocks and shares ISA",
+            "Lifetime ISA",
+            "GIA",
+            "Onshore bond",
+            "Offshore bond",
+            "NS&I",
+            "Shares",
+            "VCT or EIS",
+            "Other"
+          ],
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "owner",
+          "label": "Owner(s)",
+          "type": "text",
+          "canonical": "investment.owner",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "provider",
+          "label": "Provider or platform",
+          "type": "text",
+          "canonical": "investment.provider",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "reference",
+          "label": "Account reference (last 4 digits)",
+          "type": "text",
+          "canonical": "investment.reference",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "value",
+          "label": "Current value",
+          "type": "currency",
+          "canonical": "investment.value",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "value_date",
+          "label": "Valuation date",
+          "type": "date",
+          "canonical": "investment.value_date",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "regular",
+          "label": "Regular contribution",
+          "type": "currency",
+          "canonical": "investment.regular_contribution",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "base_cost",
+          "label": "Base cost / amount invested",
+          "type": "currency",
+          "canonical": "investment.base_cost",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "charges",
+          "label": "Charges",
+          "type": "text",
+          "canonical": "investment.charges",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        }
+      ]
+    },
+    {
+      "id": "pensions",
+      "title": "Pensions",
+      "repeat": "per_item",
+      "fields": [
+        {
+          "id": "owner",
+          "label": "Whose pension",
+          "type": "text",
+          "canonical": "pension.owner",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "type",
+          "label": "Type",
+          "type": "enum",
+          "canonical": "pension.type",
+          "required": true,
+          "options": [
+            "Workplace DC",
+            "Personal pension",
+            "SIPP",
+            "Stakeholder",
+            "Retirement annuity contract",
+            "Section 32",
+            "Defined benefit",
+            "AVC or FSAVC",
+            "Annuity in payment"
+          ],
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "provider",
+          "label": "Provider or scheme",
+          "type": "text",
+          "canonical": "pension.provider",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "reference",
+          "label": "Plan reference (last 4 digits)",
+          "type": "text",
+          "canonical": "pension.reference",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "employer",
+          "label": "Employer (workplace schemes)",
+          "type": "text",
+          "canonical": "pension.employer",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "status",
+          "label": "Status",
+          "type": "enum",
+          "canonical": "pension.status",
+          "required": true,
+          "options": [
+            "Active",
+            "Deferred",
+            "In drawdown",
+            "In payment"
+          ],
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "value",
+          "label": "Fund value",
+          "type": "currency",
+          "canonical": "pension.value",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "transfer_value",
+          "label": "Transfer value (CETV for DB)",
+          "type": "currency",
+          "canonical": "pension.transfer_value",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "value_date",
+          "label": "Valuation date",
+          "type": "date",
+          "canonical": "pension.value_date",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "crystallised",
+          "label": "Crystallised amount",
+          "type": "currency",
+          "canonical": "pension.crystallised_value",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "contribution_personal",
+          "label": "Personal contribution",
+          "type": "currency",
+          "canonical": "pension.contribution_personal",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "contribution_employer",
+          "label": "Employer contribution",
+          "type": "currency",
+          "canonical": "pension.contribution_employer",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "contribution_basis",
+          "label": "Contribution basis",
+          "type": "enum",
+          "canonical": "pension.contribution_basis",
+          "required": false,
+          "options": [
+            "Relief at source",
+            "Net pay",
+            "Salary sacrifice"
+          ],
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "retirement_age",
+          "label": "Selected or normal retirement age",
+          "type": "number",
+          "canonical": "pension.selected_retirement_age",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "funds",
+          "label": "Funds or strategy",
+          "type": "long_text",
+          "canonical": "pension.funds",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "charges",
+          "label": "Charges",
+          "type": "text",
+          "canonical": "pension.charges",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "db_pension",
+          "label": "DB: pension at normal retirement age",
+          "type": "currency",
+          "canonical": "pension.db_pension_at_nra",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "db_spouse",
+          "label": "DB: spouse's or dependant's pension",
+          "type": "text",
+          "canonical": "pension.db_spouse_pension",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "safeguarded",
+          "label": "Safeguarded benefits (DB, GAR, GMP)",
+          "type": "text",
+          "canonical": "pension.safeguarded_benefits",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "protected_tfc",
+          "label": "Protected tax-free cash",
+          "type": "text",
+          "canonical": "pension.protected_tfc",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "protected_age",
+          "label": "Protected pension age",
+          "type": "text",
+          "canonical": "pension.protected_pension_age",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "mvr_exit",
+          "label": "MVR or exit charges",
+          "type": "text",
+          "canonical": "pension.exit_charges",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "nomination",
+          "label": "Expression of wish on file (who and date)",
+          "type": "text",
+          "canonical": "pension.nomination",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        }
+      ]
+    },
+    {
+      "id": "pension_tax",
+      "title": "Pension allowances and protections",
+      "repeat": "per_client",
+      "fields": [
+        {
+          "id": "aa_used",
+          "label": "Pension input amounts, last three tax years",
+          "type": "long_text",
+          "canonical": "pension_tax.aa_used",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "mpaa",
+          "label": "MPAA triggered (date)",
+          "type": "text",
+          "canonical": "pension_tax.mpaa_triggered",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "lsa_used",
+          "label": "Lump sum allowance used",
+          "type": "currency",
+          "canonical": "pension_tax.lsa_used",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "protections",
+          "label": "Protections held and references",
+          "type": "text",
+          "canonical": "pension_tax.protections",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        }
+      ]
+    },
+    {
+      "id": "state_pension",
+      "title": "State Pension",
+      "repeat": "per_client",
+      "fields": [
+        {
+          "id": "forecast",
+          "label": "Forecast (weekly)",
+          "type": "currency",
+          "canonical": "state_pension.forecast",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "forecast_date",
+          "label": "Date of forecast",
+          "type": "date",
+          "canonical": "state_pension.forecast_date",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "spa",
+          "label": "State Pension age",
+          "type": "text",
+          "canonical": "state_pension.age",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "ni_gaps",
+          "label": "NI record gaps",
+          "type": "text",
+          "canonical": "state_pension.ni_gaps",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        }
+      ]
+    },
+    {
+      "id": "protection",
+      "title": "Protection policies",
+      "repeat": "per_item",
+      "fields": [
+        {
+          "id": "type",
+          "label": "Type",
+          "type": "enum",
+          "canonical": "protection.type",
+          "required": true,
+          "options": [
+            "Life",
+            "Critical illness",
+            "Income protection",
+            "Family income benefit",
+            "Private medical"
+          ],
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "provider",
+          "label": "Provider",
+          "type": "text",
+          "canonical": "protection.provider",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "life_assured",
+          "label": "Life or lives assured",
+          "type": "text",
+          "canonical": "protection.life_assured",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "sum_assured",
+          "label": "Sum assured or benefit",
+          "type": "currency",
+          "canonical": "protection.sum_assured",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "premium",
+          "label": "Monthly premium",
+          "type": "currency",
+          "canonical": "protection.premium",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "end_date",
+          "label": "End date",
+          "type": "date",
+          "canonical": "protection.end_date",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        },
+        {
+          "id": "in_trust",
+          "label": "Written in trust",
+          "type": "boolean",
+          "canonical": "protection.in_trust",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "document"
+        }
+      ]
+    },
+    {
+      "id": "estate",
+      "title": "Wills, powers of attorney and estate",
+      "repeat": "per_client",
+      "fields": [
+        {
+          "id": "will",
+          "label": "Will in place (date)",
+          "type": "text",
+          "canonical": "estate.will",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "lpa_financial",
+          "label": "LPA for property and financial affairs",
+          "type": "text",
+          "canonical": "estate.lpa_financial",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "lpa_health",
+          "label": "LPA for health and welfare",
+          "type": "text",
+          "canonical": "estate.lpa_health",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "gifts",
+          "label": "Gifts in the last seven years",
+          "type": "long_text",
+          "canonical": "estate.gifts",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "inheritance",
+          "label": "Expected inheritances",
+          "type": "text",
+          "canonical": "estate.inheritance_expected",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        }
+      ]
+    },
+    {
+      "id": "objectives",
+      "title": "Objectives",
+      "repeat": "once",
+      "fields": [
+        {
+          "id": "summary",
+          "label": "Your objectives, in your words",
+          "type": "long_text",
+          "canonical": "objectives.summary",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "priorities",
+          "label": "Priorities",
+          "type": "long_text",
+          "canonical": "objectives.priorities",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "target_date",
+          "label": "Target retirement date or age",
+          "type": "text",
+          "canonical": "retirement.target_date",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "income_need",
+          "label": "Income wanted in retirement (today's terms)",
+          "type": "currency",
+          "canonical": "retirement.income_need",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "lump_sums",
+          "label": "Lump sums wanted, and when",
+          "type": "long_text",
+          "canonical": "retirement.lump_sum_need",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "secure_vs_flexible",
+          "label": "Views on secure versus flexible income",
+          "type": "long_text",
+          "canonical": "retirement.income_flexibility",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "legacy",
+          "label": "Wishes to leave money to others",
+          "type": "long_text",
+          "canonical": "retirement.legacy_wishes",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        }
+      ]
+    },
+    {
+      "id": "risk",
+      "title": "Attitude to risk, capacity for loss and experience",
+      "repeat": "per_client",
+      "fields": [
+        {
+          "id": "questionnaire",
+          "label": "Risk questionnaire used and date",
+          "type": "text",
+          "canonical": "atr.questionnaire",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "adviser"
+        },
+        {
+          "id": "client_comments",
+          "label": "What you told us about risk",
+          "type": "long_text",
+          "canonical": "atr.client_comments",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "atr_result",
+          "label": "Assessed attitude to risk",
+          "type": "text",
+          "canonical": "atr.result",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "adviser"
+        },
+        {
+          "id": "cfl_facts",
+          "label": "Reliance on these savings; other secure income",
+          "type": "long_text",
+          "canonical": "capacity_for_loss.facts",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "cfl_result",
+          "label": "Assessed capacity for loss",
+          "type": "text",
+          "canonical": "capacity_for_loss.result",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "adviser"
+        },
+        {
+          "id": "experience",
+          "label": "Investment knowledge and experience",
+          "type": "long_text",
+          "canonical": "experience.investments",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "sustainability",
+          "label": "Sustainability preferences",
+          "type": "long_text",
+          "canonical": "preferences.sustainability",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        },
+        {
+          "id": "exclusions",
+          "label": "Investments you want to avoid",
+          "type": "long_text",
+          "canonical": "preferences.exclusions",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "conversation"
+        }
+      ]
+    },
+    {
+      "id": "declaration",
+      "title": "Declaration",
+      "repeat": "per_client",
+      "fields": [
+        {
+          "id": "confirmation",
+          "label": "I confirm the information in this fact-find is accurate and complete",
+          "type": "boolean",
+          "canonical": "declaration.client_confirmation",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "client_only"
+        },
+        {
+          "id": "data_consent",
+          "label": "I consent to the processing of health information for this advice",
+          "type": "boolean",
+          "canonical": "declaration.data_consent",
+          "required": false,
+          "options": null,
+          "special_category": false,
+          "source_hint": "client_only"
+        },
+        {
+          "id": "signature",
+          "label": "Signature",
+          "type": "text",
+          "canonical": "declaration.client_signature",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "client_only"
+        },
+        {
+          "id": "date_signed",
+          "label": "Date",
+          "type": "date",
+          "canonical": "declaration.date_signed",
+          "required": true,
+          "options": null,
+          "special_category": false,
+          "source_hint": "client_only"
+        }
+      ]
+    }
+  ]
+}

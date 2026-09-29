@@ -132,7 +132,7 @@ If neither is connected, or the adviser would rather send it themselves, hand ba
 
 ## Output
 
-Write all three as markdown files first, clearly labelled: the prospect summary (A), the paraplanner handoff (B), and the what-to-expect memo (C). Remind the adviser that A and C need compliance review before going out (Step 4), that B stays internal, that any plan flagged for safeguarded benefits or a GAR goes to /pension-transfer-check next, and that the full advice itself is a separate next step the team builds from B once the providers' LOA responses are in.
+Write all three as markdown files first, clearly labelled: the prospect summary (A), the paraplanner handoff (B), and the what-to-expect memo (C). Remind the adviser that A and C need compliance review before going out (Step 4), that B stays internal, that any plan flagged for safeguarded benefits or a GAR goes to /pension-transfer-check next, that /fact-find can pre-fill the firm's own fact-find from these same files plus the meeting notes (reading this skill's outputs as a source), and that the full advice itself is a separate next step the team builds from B once the providers' LOA responses are in.
 
 Then ask the adviser whether they'd like the prospect-facing pieces (A and C) converted to .docx or .pdf — don't create either format unless they ask. B stays internal and markdown is fine for it either way.
 

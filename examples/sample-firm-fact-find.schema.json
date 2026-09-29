@@ -1,0 +1,76 @@
+{
+  "schema_format": "pensions-adviser/fact-find-schema@1",
+  "firm": "Harbour Lane Financial Planning Ltd (fictional)",
+  "name": "Retirement Fact-Find",
+  "version": "2026-09-29",
+  "status": "draft",
+  "approved_by": "",
+  "source": {
+    "type": "fillable-pdf",
+    "file": "sample-firm-fact-find.pdf",
+    "notes": "Fictional sample. Two-client layout; pension table has three rows; address is a single joint box."
+  },
+  "clients": ["client1", "client2"],
+  "sections": [
+    {
+      "id": "about_you",
+      "title": "1. About you",
+      "repeat": "per_client",
+      "fields": [
+        {"id": "full_name", "label": "Full name", "type": "text", "canonical": "person.full_name", "required": true, "options": null, "special_category": false, "source_hint": "document", "pdf_field": {"client1": "C1_FullName", "client2": "C2_FullName"}},
+        {"id": "dob", "label": "Date of birth", "type": "date", "canonical": "person.dob", "required": true, "options": null, "special_category": false, "source_hint": "document", "pdf_field": {"client1": "C1_DOB", "client2": "C2_DOB"}},
+        {"id": "ni_number", "label": "NI number", "type": "text", "canonical": "person.ni_number", "required": true, "options": null, "special_category": false, "source_hint": "document", "pdf_field": {"client1": "C1_NINO", "client2": "C2_NINO"}},
+        {"id": "occupation", "label": "Occupation", "type": "text", "canonical": "employment.occupation", "required": false, "options": null, "special_category": false, "source_hint": "conversation", "pdf_field": {"client1": "C1_Occupation", "client2": "C2_Occupation"}},
+        {"id": "retirement_age", "label": "Planned retirement age", "type": "number", "canonical": "employment.intended_retirement_age", "required": true, "options": null, "special_category": false, "source_hint": "conversation", "pdf_field": {"client1": "C1_RetAge", "client2": "C2_RetAge"}},
+        {"id": "smoker", "label": "Smoker?", "type": "boolean", "canonical": "health.smoker", "required": false, "options": null, "special_category": true, "source_hint": "conversation", "pdf_field": {"client1": "C1_Smoker", "client2": "C2_Smoker"}}
+      ]
+    },
+    {
+      "id": "home",
+      "title": "2. Your home",
+      "repeat": "once",
+      "fields": [
+        {"id": "address", "label": "Home address", "type": "long_text", "canonical": "person.address", "required": true, "options": null, "special_category": false, "source_hint": "document", "pdf_field": "Joint_Address"}
+      ]
+    },
+    {
+      "id": "pensions",
+      "title": "3. Pension plans",
+      "repeat": "per_item",
+      "max_items": 3,
+      "fields": [
+        {"id": "owner", "label": "Owner", "type": "text", "canonical": "pension.owner", "required": true, "options": null, "special_category": false, "source_hint": "document", "pdf_field": "Pen{n}_Owner"},
+        {"id": "provider", "label": "Provider", "type": "text", "canonical": "pension.provider", "required": true, "options": null, "special_category": false, "source_hint": "document", "pdf_field": "Pen{n}_Provider"},
+        {"id": "type", "label": "Type", "type": "text", "canonical": "pension.type", "required": true, "options": null, "special_category": false, "source_hint": "document", "pdf_field": "Pen{n}_Type"},
+        {"id": "value", "label": "Value (£)", "type": "currency", "canonical": "pension.value", "required": true, "options": null, "special_category": false, "source_hint": "document", "pdf_field": "Pen{n}_Value"},
+        {"id": "guarantees", "label": "Guarantees?", "type": "text", "canonical": "custom", "required": true, "options": null, "special_category": false, "source_hint": "document", "pdf_field": "Pen{n}_Guarantees", "help": "Firm uses this box for any guarantee or protected benefit: GAR, GMP, DB, protected tax-free cash, guaranteed growth"}
+      ]
+    },
+    {
+      "id": "objectives",
+      "title": "4. What you want to achieve",
+      "repeat": "once",
+      "fields": [
+        {"id": "objectives", "label": "Your objectives", "type": "long_text", "canonical": "objectives.summary", "required": true, "options": null, "special_category": false, "source_hint": "conversation", "pdf_field": "Objectives"},
+        {"id": "income_target", "label": "Retirement income wanted (£ a year)", "type": "currency", "canonical": "retirement.income_need", "required": true, "options": null, "special_category": false, "source_hint": "conversation", "pdf_field": "IncomeTarget"}
+      ]
+    },
+    {
+      "id": "risk",
+      "title": "5. Risk (adviser to complete)",
+      "repeat": "per_client",
+      "fields": [
+        {"id": "risk_result", "label": "Risk profile result", "type": "text", "canonical": "atr.result", "required": true, "options": null, "special_category": false, "source_hint": "adviser", "pdf_field": {"client1": "C1_RiskResult", "client2": "C2_RiskResult"}}
+      ]
+    },
+    {
+      "id": "declaration",
+      "title": "6. Declaration",
+      "repeat": "per_client",
+      "fields": [
+        {"id": "confirm", "label": "I confirm the information is correct", "type": "boolean", "canonical": "declaration.client_confirmation", "required": true, "options": null, "special_category": false, "source_hint": "client_only", "pdf_field": {"client1": "C1_Declare", "client2": "C2_Declare"}},
+        {"id": "signature", "label": "Signature", "type": "text", "canonical": "declaration.client_signature", "required": true, "options": null, "special_category": false, "source_hint": "client_only", "pdf_field": {"client1": "C1_Signature", "client2": "C2_Signature"}}
+      ]
+    }
+  ]
+}

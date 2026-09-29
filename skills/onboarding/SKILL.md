@@ -93,11 +93,11 @@ Options, each with its fixed subtitle as the AskUserQuestion `description`:
 - Prepping and writing up client meetings — subtitle: "Annual reviews, agendas, file notes, and follow-ups"
 - Retirement income and tax planning — subtitle: "Drawdown, portfolios, allowances and death benefits"
 - Compliance and file checking — subtitle: "Getting client communications and files right first time"
-- New clients and pension transfers — subtitle: "Statements, LOAs, and chasing ceding scheme information"
+- New clients and pension transfers — subtitle: "Fact-finds, statements, LOAs, and chasing ceding scheme information"
 
 The subtitles hint at the work each option covers, in adviser language — never name a skill or slash command in them (the adviser hasn't been introduced to skills yet; that's Step 6), and use them verbatim. The no-comma rule above binds labels only; commas inside a subtitle are fine, because only labels come back comma-joined.
 
-**Do not generate one option per available skill.** The plugin has more skills than AskUserQuestion allows options, so a per-skill list is rejected outright and the adviser sees no question at all. Each option is a felt headache, not a skill name, and each maps to one, two or three skills: meetings → pre-meeting and post-meeting; retirement income and tax → retirement-income-review, portfolio-rebalance-review and death-benefits-and-tax-brief; compliance → compliance alone; new clients and transfers → prospect-intake and pension-transfer-check. Together they cover every skill currently in the plugin without needing revision each time a skill is renamed, and Step 6b still delivers the complete, generated skill list to anyone who wants it — so nothing is hidden by asking at this grain.
+**Do not generate one option per available skill.** The plugin has more skills than AskUserQuestion allows options, so a per-skill list is rejected outright and the adviser sees no question at all. Each option is a felt headache, not a skill name, and each maps to one, two or three skills: meetings → pre-meeting and post-meeting; retirement income and tax → retirement-income-review, portfolio-rebalance-review and death-benefits-and-tax-brief; compliance → compliance alone; new clients and transfers → prospect-intake, fact-find and pension-transfer-check (fact-find-setup is the one-off setup behind fact-find, not a headache of its own). Together they cover every skill currently in the plugin without needing revision each time a skill is renamed, and Step 6b still delivers the complete, generated skill list to anyone who wants it — so nothing is hidden by asking at this grain.
 
 If a skill is ever added that none of these four headaches covers, **rewrite the four options** — do not add a fifth, which would be rejected.
 
@@ -381,7 +381,7 @@ Based on their Step 3 headaches (and what you learned about their role and firm 
 Three of Step 3's options map to more than one skill, so pick the one within the group that best fits what you learned in Step 2 and what they actually connected in Step 5:
 - **Meetings** → `/pre-meeting` vs. `/post-meeting`, on which side of the meeting they described.
 - **Retirement income and tax** → `/retirement-income-review` if they use a cashflow modelling tool (Step 4c) or gave no clearer signal; `/portfolio-rebalance-review` if their answers leaned on platforms (Step 4b) and portfolio drift rather than income; `/death-benefits-and-tax-brief` if nominations, allowances, inheritance tax or death benefits came up in their own words.
-- **New clients and transfers** → `/pension-transfer-check` if they use a transfer tool in Step 4h (Origo Options or Selectapension) or mentioned transfers or ceding schemes; otherwise `/prospect-intake`.
+- **New clients and transfers** → `/pension-transfer-check` if they use a transfer tool in Step 4h (Origo Options or Selectapension) or mentioned transfers or ceding schemes; `/fact-find` if they described re-keying client documents or meeting notes into a fact-find; otherwise `/prospect-intake`. If you recommend `/fact-find`, add one line that `/fact-find-setup` loads their firm's own fact-find first — a one-off step, usually done once per firm — and that without it `/fact-find` uses a generic UK pensions fact-find.
 
 Don't name the option back to them, and don't offer two.
 

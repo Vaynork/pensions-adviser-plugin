@@ -10,8 +10,10 @@ UK pensions and retirement advisers. The US regulatory content (SEC, FINRA,
 Reg BI) has been replaced with FCA and UK tax content. US-specific connectors
 have been removed. The alts-brief and estate-and-tax-brief skills and the
 titling-compare agent have been removed or replaced. The
-retirement-income-review, pension-transfer-check and
-death-benefits-and-tax-brief skills and the nomination-compare agent are new.
+retirement-income-review, pension-transfer-check,
+death-benefits-and-tax-brief, fact-find-setup and fact-find skills, the
+nomination-compare and fact-extract agents, and the fact-find scripts and
+examples are new.
 All remaining skills, agents and documentation have been edited for the UK.
 
 This project is not affiliated with, endorsed by or supported by Anthropic.

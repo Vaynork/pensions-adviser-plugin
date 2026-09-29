@@ -3,3 +3,8 @@
 .idea/
 .vscode/
 .claude/
+
+# Completed fact-finds and fill inputs hold client data — never commit them
+/fact-find/
+*.values.json
+__pycache__/

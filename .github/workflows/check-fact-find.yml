@@ -1,0 +1,51 @@
+name: Check fact-find tooling
+
+# Keeps the fact-find schemas and scripts honest: the shipped default schema
+# and the example schema must validate, the example schema must map onto the
+# sample PDF, and a fill round-trip must land its values. Fictional data only.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install pypdf
+      - name: Validate schemas
+        run: |
+          set -euo pipefail
+          python skills/fact-find-setup/scripts/validate_schema.py skills/fact-find/references/default-uk-pensions-fact-find.json
+          python skills/fact-find-setup/scripts/validate_schema.py examples/sample-firm-fact-find.schema.json --pdf examples/sample-firm-fact-find.pdf
+          if [ -f firm-config/fact-find-schema.json ]; then
+            python skills/fact-find-setup/scripts/validate_schema.py firm-config/fact-find-schema.json
+          fi
+      - name: Fill round-trip on the sample form
+        run: |
+          set -euo pipefail
+          cat > "$RUNNER_TEMP/values.json" <<'JSON'
+          {"C1_FullName": "Test Client", "C2_Smoker": true, "Pen1_Provider": "Example SIPP", "Objectives": "Test objective"}
+          JSON
+          python skills/fact-find/scripts/fill_pdf.py --template examples/sample-firm-fact-find.pdf \
+            --values "$RUNNER_TEMP/values.json" --out "$RUNNER_TEMP/filled.pdf"
+          python - "$RUNNER_TEMP/filled.pdf" <<'PY'
+          import sys
+          from pypdf import PdfReader
+          f = PdfReader(sys.argv[1]).get_fields()
+          assert f["C1_FullName"]["/V"] == "Test Client", f["C1_FullName"].get("/V")
+          assert f["C2_Smoker"]["/V"] == "/Yes", f["C2_Smoker"].get("/V")
+          assert f["Pen1_Provider"]["/V"] == "Example SIPP"
+          assert not f["C1_Signature"].get("/V"), "signature must stay blank"
+          print("round-trip ok")
+          PY
