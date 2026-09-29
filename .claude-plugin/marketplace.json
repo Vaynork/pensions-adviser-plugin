@@ -3,6 +3,7 @@
   "owner": {
     "name": "Vaynork"
   },
+  "description": "Pensions Adviser (UK): Claude workflows for FCA-authorised pensions and retirement advisers and paraplanners. Unofficial; not affiliated with Anthropic.",
   "plugins": [
     {
       "name": "pensions-adviser",

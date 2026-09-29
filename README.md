@@ -1,92 +1,193 @@
 # Pensions Adviser (UK)
 
-A Claude plugin for **UK pensions and retirement advisers and paraplanners** at FCA-authorised firms. It gives you ready-to-run workflows for annual review preparation, meeting write-ups, compliance pre-checks, pension statement intake, pension transfer fact-finding, drawdown reviews, portfolio reviews, and death-benefit and allowance briefs. The workflows draw on the tools your firm already uses, through connectors where they exist and paste or upload where they don't.
+**Claude workflows for UK pensions and retirement advisers and paraplanners.** Upload a client's statements and meeting notes and get back a pre-filled fact-find in your firm's own format. Prepare an annual review pack in minutes. Pre-check a client letter against FCA rules before it goes to compliance. Fact-find a pension transfer without missing a guarantee.
 
-> **Unofficial community adaptation.** This is a fork of Anthropic's [Claude for Financial Advisors](https://github.com/anthropics/claude-for-financial-advisors) reference plugin. The original targets US advisers (SEC Marketing Rule, Reg BI, IRAs and 401(k)s, US wealth platforms). This fork reworks it for the UK regime: FCA rules, Consumer Duty, UK pension wrappers and the UK adviser tech stack. It is **not affiliated with, endorsed by or supported by Anthropic.**
+It is a plugin for Claude: a set of plain-language instructions (skills) that turn Claude into a careful assistant for pensions advice work. You stay the adviser. Claude gathers, organises and drafts; you check, decide and advise.
 
-The plugin is a set of skills written as plain instructions (Markdown and JSON). It holds no client data. When an adviser runs a skill, Claude pulls what it needs from connected systems or from files the adviser provides. The adviser must approve any action that writes back to an external system (CRM notes, tasks, email drafts). Claude gathers, organises, summarises, compares and presents information. The adviser exercises judgement, makes the recommendation and gives the advice.
+> **Unofficial community project.** This is an independent UK adaptation of Anthropic's [Claude for Financial Advisors](https://github.com/anthropics/claude-for-financial-advisors) reference plugin, which was built for US advisers. It is **not affiliated with, endorsed by or supported by Anthropic.** For use by professionals at FCA-authorised firms only; it does not give advice (see [Important information](#important-information)).
 
-Professional support for advisers only. Nothing here is financial, tax, legal or regulated advice, and nothing here is a suitability determination.
+## What it looks like in practice
 
-## Skills
+*A fictional example.*
+
+> **Adviser:** `/fact-find` for Priya and Tom Hartley. *(uploads six pension statements, two P60s, a State Pension forecast and yesterday's meeting transcript)*
+>
+> **Claude:** reads every document in parallel, then writes out:
+> - **the firm's own fact-find, pre-filled**: 94 of 130 fields, each with its source;
+> - **a filled copy of the firm's PDF form**;
+> - **a gaps list**: 11 questions for the client, 3 values to request from providers, and a note that one plan has a guaranteed annuity rate (with a pointer to `/pension-transfer-check`);
+> - **one conflict to resolve**: the transcript says retirement at 63, but the workplace scheme has a selected retirement age of 65.
+>
+> Declarations, signatures and the attitude-to-risk result are left blank for the client and adviser. Nothing is written to your back office until you approve it.
+
+## Who it's for
+
+- **Advisers and paraplanners** at directly authorised firms and appointed representatives, doing pensions accumulation, consolidation and transfers, drawdown and retirement income, and death-benefit and tax planning.
+- **Compliance and operations teams** who want consistent fact-finds, review files and pre-checked client communications.
+
+It is **not** a robo-adviser or a replacement for your advice process, your risk-profiling tool, your cashflow model or your compliance sign-off. It works alongside them.
+
+## What you need
+
+- **Claude with plugins:** Claude Code, or the Claude desktop app with plugin support, on a plan your firm has approved for client data.
+- **Optional connectors** for systems you already use: Microsoft 365 or Google Workspace, Salesforce, Zocks, document stores. Most UK back offices and platforms don't have connectors yet; every skill works from uploads and pasted exports instead (see [Connecting your systems](#connecting-your-systems)).
+- **Optional: Python with `pypdf`** (`python -m pip install pypdf`), only if you want `/fact-find` to fill your firm's PDF form directly.
+- **Your firm's approval** to use an AI assistant with client data, and a lawful basis for any health data you record.
+
+## Get started
+
+**1. Install the plugin.** In Claude Code, run:
+
+```bash
+claude plugin marketplace add Vaynork/pensions-adviser-plugin
+```
+
+```bash
+claude plugin install pensions-adviser@pensions-adviser
+```
+
+Or, inside a Claude session: `/plugin marketplace add Vaynork/pensions-adviser-plugin`, then `/plugin install pensions-adviser@pensions-adviser`. If you use plugins in the Claude desktop app instead, add the same GitHub repository, `Vaynork/pensions-adviser-plugin`, as a plugin marketplace there and install **Pensions Adviser (UK)**.
+
+**2. Run `/onboarding`.** A short guided setup. It asks about your role, whether your firm is directly authorised or an appointed representative, and your tech stack. It connects what can be connected, then walks you through a demo annual review for a fictional household, so no real client data is needed for your first run.
+
+**3. Run `/fact-find-setup`.** Point it at your firm's fact-find (PDF, Word, Excel or a back-office import template), or at the shared setup your firm has already made. It takes a few minutes and you only do it once. See [Your firm's fact-find](#your-firms-fact-find).
+
+**4. Try it on real work.** Good first runs:
+- `/fact-find` for a new client, with their documents and your meeting notes.
+- `/pre-meeting` for your next annual review.
+- `/compliance` on a draft client email, review letter or social post.
+
+Want to try it without any client data? The [`examples/`](examples/) folder has a fictional firm's fillable fact-find to practise on.
+
+## What you can do
+
+Each skill is a slash command, and you can also just ask in plain English ("prep me for the Hartleys' review on Thursday").
+
+### Set up once
 
 | Skill | What it does |
 | :---- | :---- |
-| `/onboarding` | Guided first-run setup. Learns your role, whether your firm is directly authorised or an appointed representative, whether you give independent or restricted advice, and your tech stack. Then it connects what can be connected and runs a demo on a fictional UK household. |
-| `/pre-meeting` | Annual or ongoing review prep pack: client snapshot, wrapper-by-wrapper pension and investment review, drawdown income taken, attitude to risk and capacity-for-loss dates, planning points to discuss (allowances, crystallisation, State Pension, nominations), Consumer Duty evidence that the ongoing service was delivered, agenda and talking points. |
-| `/post-meeting` | Turns a meeting (from a note-taker, CRM summary or transcript) into a file note, follow-up tasks and opportunities, all approved in one batch before anything is written. It captures what the FCA expects to see evidenced. |
-| `/compliance` | Pre-checks client-facing material against FCA financial promotion rules (COBS 4: fair, clear and not misleading; past and future performance), the Consumer Duty consumer-understanding outcome, pensions-specific expectations (DB transfers, drawdown, consolidation, tax-free cash) and FG24/1 for social media. It produces a findings table, disclosure wording to adapt and a clean redraft for your compliance officer or network. |
-| `/prospect-intake` | Normalises a prospect's pension and investment statements into a summary, a paraplanner handoff and a "what to expect" note. It never misses the features that must be preserved: safeguarded benefits, guaranteed annuity rates, protected tax-free cash, exit charges and market value reductions. It also tracks outstanding letters of authority. |
-| `/fact-find-setup` | One-off setup that loads **your firm's own fact-find** — a fillable or flat PDF, Word, Excel, a back-office import template, or an existing schema — maps every field to a standard vocabulary, validates it, and saves a reusable schema for your compliance owner to sign off. Each adviser runs it once to point at the firm's shared schema. Without it, `/fact-find` uses a generic UK pensions fact-find. |
-| `/fact-find` | Pre-fills that fact-find from what you already hold: uploaded statements, photos or scans of client documents, the meeting transcript or file notes, and the CRM record. Every answer shows its source and whether it was read, stated by the client or inferred. Conflicts are surfaced, never resolved silently. Declarations, signatures and the assessed risk result are always left blank. Produces the completed fact-find, a filled copy of your PDF form (if it's fillable) or a back-office import row, a source trail, and a gaps list of questions still to ask. |
-| `/pension-transfer-check` | Fact-finds a proposed transfer or consolidation. It builds a ceding-scheme features table, identifies safeguarded benefits and the £30,000 advice requirement, lists scam red and amber flag indicators under the 2021 transfer regulations, compares costs from supplied figures and produces an information chase list. It never assesses suitability; that stays with the adviser and the pension transfer specialist. |
-| `/retirement-income-review` | Drawdown sustainability evidence: income taken against plan, withdrawal rate from supplied figures, cash buffer and sequencing-risk flags, cashflow-model assumptions and outputs quoted as reported, and a checklist against the FCA's retirement income advice expectations (TR24/1). |
-| `/portfolio-rebalance-review` | Drift against the client's risk-profile model or your centralised investment proposition, across SIPP, ISA, GIA and workplace wrappers. Lays out tax-aware options (wrappers first, the CGT annual exempt amount, the 30-day share-matching rule, Bed & ISA and Bed & SIPP) without disrupting drawdown income, and drafts a rationale memo for the file. |
-| `/death-benefits-and-tax-brief` | Checks each plan's expression of wish or nomination against what the client intends. It also reports the pension tax position (annual allowance, carry forward, MPAA, LSA and LSDBA, protections) from figures on file and summarises the facts relevant to the April 2027 pensions and inheritance tax change. It refers every flag to the client's solicitor or the scheme administrator. |
+| `/onboarding` | First-run tour and setup: firm type, tech stack and connectors, then a demo on a fictional household. |
+| `/fact-find-setup` | Loads your firm's own fact-find so `/fact-find` fills *your* form, in your order and wording. Run once per firm (by the form's owner) and once per adviser (to point at the shared setup). |
 
-Every skill falls back to paste or upload when a system isn't connected, and every write to a client system pauses for adviser approval.
+### New clients and transfers
 
-## Using your firm's own fact-find
+| Skill | What it does |
+| :---- | :---- |
+| `/fact-find` | Pre-fills your fact-find from uploaded documents (photos and scans are fine), the meeting transcript or notes, and the CRM record. Every answer shows where it came from; conflicts are raised rather than guessed; gaps become a question list. Outputs your completed fact-find, a filled PDF or back-office import row, a source trail and a gaps list. |
+| `/prospect-intake` | Turns a prospect's pile of pension and investment statements into a summary for the prospect, a paraplanner handoff and a "what happens next" note. It never misses the features that must be preserved (safeguarded benefits, guaranteed annuity rates, protected tax-free cash, exit charges, market value reductions) and tracks outstanding letters of authority. |
+| `/pension-transfer-check` | Fact-find for a proposed transfer or consolidation: a table of the ceding scheme's features and guarantees, whether safeguarded benefits bring in the £30,000 advice requirement, scam red and amber flag indicators, a ceding-versus-receiving cost comparison and a chase list. It never judges suitability; that stays with the adviser and the pension transfer specialist. |
 
-Every firm's fact-find is different, so the plugin doesn't assume one. It works from a **fact-find schema**: a JSON description of your form's sections and fields, in your order and wording, with each field mapped to a standard meaning (`pension.provider`, `retirement.income_need` and so on). That mapping is what lets the same extracted fact land in the right box on any firm's form.
+### Reviews and meetings
 
-1. **Once per form version** — whoever owns the fact-find (usually the compliance lead or a senior paraplanner; the network, for appointed representatives) runs `/fact-find-setup` with the blank form. It builds the schema, validates it, and shows the mappings it was unsure of. Save it somewhere shared, have it reviewed, and mark it approved.
-2. **Once per adviser** — each adviser runs `/fact-find-setup`, chooses the firm's shared schema, and pastes the one line it gives them into their Claude settings.
-3. **For every client** — `/fact-find` with the client's documents and meeting notes.
+| Skill | What it does |
+| :---- | :---- |
+| `/pre-meeting` | Annual or ongoing review pack: client snapshot, wrapper-by-wrapper review, drawdown income taken, when attitude to risk and capacity for loss were last assessed, planning points to discuss, evidence that the ongoing service was delivered (Consumer Duty), agenda and talking points. |
+| `/post-meeting` | Turns the meeting into a file note, follow-up tasks and opportunities, with everything the FCA expects to see evidenced. You approve the lot in one go before anything is written to your CRM. |
 
-Firms that keep their own fork of this plugin can commit the schema to [`firm-config/`](firm-config/) so every adviser gets it on install. The format is documented in [`skills/fact-find-setup/references/schema-format.md`](skills/fact-find-setup/references/schema-format.md). A fictional sample form and its schema are in [`examples/`](examples/) to try it out. Filling a PDF form needs Python with `pypdf` (`python -m pip install pypdf`); everything else works without it.
+### Planning
 
-## Connectors
+| Skill | What it does |
+| :---- | :---- |
+| `/retirement-income-review` | Drawdown sustainability evidence: income taken against plan, the withdrawal rate, cash buffer and sequencing-risk flags, your cashflow model's outputs as reported, and a checklist against the FCA's retirement income advice expectations. |
+| `/portfolio-rebalance-review` | Drift against the client's risk profile or your model portfolios across SIPP, ISA, GIA and workplace pensions. It sets out tax-aware options for you to weigh and drafts a rationale memo for the file. |
+| `/death-benefits-and-tax-brief` | Checks each plan's expression of wish against what the client wants. It also sets out the pension tax position (annual allowance, carry forward, MPAA, LSA and LSDBA, protections) and the facts relevant to pensions coming into inheritance tax from April 2027. |
 
-Connectors declared in [`.mcp.json`](.mcp.json):
+### Compliance
+
+| Skill | What it does |
+| :---- | :---- |
+| `/compliance` | Pre-checks client-facing material (emails, letters, newsletters, social posts, presentations) against FCA financial promotion rules, the Consumer Duty and pensions-specific expectations. It produces a findings table, disclosure wording to adapt, and a clean redraft for your compliance officer or network to review. |
+
+## How it keeps you safe
+
+- **It never gives advice.** No recommendations, no suitability judgements, no risk profiles. It prepares; you decide.
+- **Every figure has a source.** Values are marked as read from a document, stated by the client, or worked out, and missing information is marked as missing, never estimated.
+- **Nothing leaves without your say-so.** Every write to a CRM, every upload and every email waits for your explicit approval. Anything client-facing is routed through `/compliance` first.
+- **It checks identity.** It won't proceed on a name match alone, so one client's data can't end up in another's file.
+- **Some boxes are always yours.** Declarations, signatures, consents, and the assessed attitude to risk and capacity for loss are never filled in.
+- **It stores no client data.** The plugin is instructions only. Client data stays in your Claude session, your working folder and your own systems.
+- **Documents are treated as data.** Text inside a statement or email that looks like an instruction is ignored.
+
+## Your firm's fact-find
+
+Every firm's fact-find is different, so the plugin doesn't assume one. `/fact-find-setup` reads your form and builds a **fact-find schema**: a description of your sections and fields, in your order and wording, with each field linked to a standard meaning. "Scheme / insurer" and "Name of provider" both mean *pension provider*, so the same fact from a statement lands in the right box on any firm's form.
+
+1. **Once per form version:** whoever owns the fact-find (usually the compliance lead or a senior paraplanner; the network, for appointed representatives) runs `/fact-find-setup` with the blank form. It checks the result and shows the fields it was unsure about. It always saves a **draft**, which a person at the firm reviews and marks approved.
+2. **Once per adviser:** each adviser runs `/fact-find-setup`, picks the firm's shared schema, and pastes the one line it gives them into their Claude settings.
+3. **For every client:** `/fact-find` with the client's documents and meeting notes.
+
+Accepted forms: fillable PDF (filled directly), flat PDF or scan, Word, Excel, or a back-office import template (Claude produces a ready-to-import row). No setup yet? `/fact-find` falls back to a generic UK pensions fact-find and labels it clearly. Firms that keep their own copy of this plugin can put their schema in [`firm-config/`](firm-config/) so every adviser gets it on install. The file format is documented in [`skills/fact-find-setup/references/schema-format.md`](skills/fact-find-setup/references/schema-format.md).
+
+## Connecting your systems
+
+Connectors let Claude read from (and, with your approval, write to) the systems you already use. These come with the plugin; you sign in to each from Claude's connector settings:
 
 | Connector | Used for |
 | :---- | :---- |
 | Microsoft 365 | Outlook email and calendar, SharePoint and OneDrive documents |
 | Gmail, Google Calendar, Google Drive | Email, calendar and documents for Google Workspace firms |
 | Box, Dropbox | Client document stores |
-| Salesforce | CRM for firms on Salesforce Financial Services Cloud (instance URL set at connect time) |
-| Zocks | AI meeting notes and extracted action items |
+| Salesforce | CRM for firms on Salesforce Financial Services Cloud |
+| Zocks | AI meeting notes and action items |
 | Zoom, Slack | Meetings and internal collaboration |
-| Addepar | Portfolio data for wealth managers who use it |
+| Addepar | Portfolio data, for wealth managers who use it |
 | Morningstar, FactSet | Fund and market research |
 
-**Most UK adviser systems don't have MCP connectors yet.** That includes back office systems (Intelligent Office, Xplan, Curo, Plannr), platforms (Transact, Quilter, AJ Bell, Aviva, Fidelity, Nucleus), cashflow tools (Voyant, CashCalc, Truth, Timeline), research and risk tools (FE Analytics, Defaqto, Dynamic Planner, Synaptic) and transfer tools (Origo Options, Selectapension). The skills look for these systems by name in case your organisation has added a connector. If none is found, they ask you to paste or upload an export and carry on. If a vendor ships an MCP server, add it to `.mcp.json` and the skills will pick it up.
-
-## Installation
-
-```
-claude plugin marketplace add Vaynork/pensions-adviser-plugin
-claude plugin install pensions-adviser
-```
-
-## What changed from the original
-
-- **Regulation:** SEC Marketing Rule, Section 206, Rule 204-2, Reg BI and FINRA 2210 are replaced by FCA COBS 4, the Consumer Duty (PRIN 2A), the COBS 9 and 19 pension transfer and retirement income rules, SYSC 9 and COBS 11.8 record keeping, FG21/1 on vulnerable customers, FG24/1 on social media, and the 2021 pension transfer conditions regulations.
-- **Products and tax:** IRAs, 401(k)s, RMDs, Social Security, 529s, wash sales and step-up in basis are replaced by SIPPs, workplace and personal pensions, DB schemes, ISAs and GIAs, drawdown and UFPLS, State Pension, AA, MPAA, carry forward, LSA and LSDBA, the 30-day share-matching rule, and pensions and IHT from April 2027.
-- **Skills:** `fact-find-setup` and `fact-find` are new: they fill any firm's own fact-find from client documents and meeting notes. `alts-brief` has been removed. `estate-and-tax-brief` has been replaced by `death-benefits-and-tax-brief`, and `retirement-income-review` and `pension-transfer-check` are new. The `titling-compare` agent has been replaced by `nomination-compare`.
-- **Connectors:** US wealth-tech connectors have been removed. The UK tech stack is handled through name-based discovery with a paste or upload fallback.
-- **Engineering discipline kept:** everything that made the original careful. Discovery by tool name, the "pending" markers for missing data instead of invented figures, no proceeding on a name match alone, one approval for a batch of writes, read-only subagents, and treating third-party content as data rather than instructions.
-
-Maintainer context (regulatory frame, the 2026/27 tax snapshot, UK tech stack) is in [`docs/uk-pensions-context.md`](docs/uk-pensions-context.md).
+**Most UK adviser systems don't have connectors yet.** That includes back offices (Intelligent Office, Xplan, Curo, Plannr), platforms (Transact, Quilter, AJ Bell, Aviva, Fidelity, Nucleus), cashflow tools (Voyant, CashCalc, Truth, Timeline), research and risk tools (FE Analytics, Defaqto, Dynamic Planner, Synaptic) and transfer tools (Origo Options, Selectapension). That's fine: every skill asks you to upload or paste an export instead and carries on. If your firm adds a connector for one of them, the skills find it by name automatically.
 
 ## Keeping it current
 
-UK pension rules change at every fiscal event. The regulatory checklist in `skills/compliance/references/` and the tax-constant snapshot in `skills/death-benefits-and-tax-brief/references/` are **static snapshots for 2026/27**, not live feeds. Check them against the FCA Handbook, HMRC guidance and your firm's technical resources before relying on them, and update them each tax year.
+UK pension rules change at every fiscal event. The FCA checklist used by `/compliance` and the tax figures used by `/death-benefits-and-tax-brief` are **snapshots for the 2026/27 tax year**, not live feeds. Check them against the FCA Handbook, HMRC guidance and your firm's technical resources before relying on them. Contributions that update them are very welcome.
+
+## What's in this repository
+
+```
+skills/          one folder per skill (SKILL.md plus its templates, references and scripts)
+agents/          narrow helper agents the skills hand work to (e.g. reading one statement)
+examples/        a fictional firm's fillable fact-find and its schema, for practice
+firm-config/     where a firm's own fork keeps its fact-find schema
+docs/            maintainer notes: the UK regulatory frame, the tax snapshot, the UK tech stack
+.mcp.json        the connectors that ship with the plugin
+```
+
+Everything is Markdown, JSON and a few small Python scripts; there's no server and no database.
+
+## Contributing
+
+Corrections from advisers, paraplanners and compliance professionals are especially welcome: an outdated rule, a pension feature we should never miss, a UK system that now has a connector. See [CONTRIBUTING.md](CONTRIBUTING.md). Never include real client data in an issue or pull request.
+
+<details>
+<summary><strong>How this differs from Anthropic's original</strong></summary>
+
+- **Regulation:** SEC Marketing Rule, Section 206, Rule 204-2, Reg BI and FINRA 2210 are replaced by FCA COBS 4, the Consumer Duty (PRIN 2A), the COBS 9 and 19 pension transfer and retirement income rules, SYSC 9 and COBS 11.8 record keeping, FG21/1 on vulnerable customers, FG24/1 on social media, and the 2021 pension transfer conditions regulations.
+- **Products and tax:** IRAs, 401(k)s, RMDs, Social Security, 529s, wash sales and step-up in basis are replaced by SIPPs, workplace and personal pensions, DB schemes, ISAs and GIAs, drawdown and UFPLS, State Pension, AA, MPAA, carry forward, LSA and LSDBA, the 30-day share-matching rule, and pensions and IHT from April 2027.
+- **Skills:** `fact-find-setup`, `fact-find`, `retirement-income-review` and `pension-transfer-check` are new. `death-benefits-and-tax-brief` replaces `estate-and-tax-brief`, and `alts-brief` has been removed. The `nomination-compare` and `fact-extract` agents are new; `titling-compare` has been removed.
+- **Connectors:** US wealth-tech connectors have been removed. The UK tech stack is handled by finding systems by name, with an upload fallback.
+- **Kept from the original:** the careful engineering — finding connectors by name, marking missing data rather than inventing it, confirming identity before reading, one approval for a batch of writes, read-only helper agents, and treating third-party content as data.
+
+Maintainer context is in [`docs/uk-pensions-context.md`](docs/uk-pensions-context.md).
+
+</details>
 
 ## Security
 
-See [SECURITY.md](SECURITY.md).
+To report a vulnerability, see [SECURITY.md](SECURITY.md).
 
-**Security considerations.** The skills and agents here are instructions, not code. Some guardrails are structural: the file-parsing subagents are allowlisted to read-only tools, and the connector-reading subagents are denied shell, file-write and web tools. The rest are enforced by the model following them, not by the runtime: adviser approval before any write, connector-reading subagents never calling a write or send tool, and arithmetic in a shell that never sees document text. Subagents read third-party content (pension statements, provider letters, client emails, CRM notes), so treat that content as untrusted. If you adapt these agents, keep the read-only and shell rules in place, prefer connectors that expose read-only tools, and don't widen any agent's tool list without reviewing what it ingests.
+<details>
+<summary><strong>Security design notes</strong></summary>
 
-## Important information: for use by professionals at FCA-authorised firms only
+The skills and agents here are instructions, not code, apart from three small Python scripts that read and fill PDF forms. Some guardrails are structural: the file-reading helper agents are limited to read-only tools, and the connector-reading agents are denied shell, file-write and web tools. The rest are enforced by the model following instructions rather than by the runtime: adviser approval before any write, connector-reading agents never calling a write or send tool, arithmetic in a shell that never sees document text, and form values passed to the PDF filler through a file rather than the command line. Helper agents read third-party content (pension statements, provider letters, client emails, CRM notes), so treat that content as untrusted. If you adapt these agents, keep the read-only and shell rules in place, prefer connectors that expose read-only tools, and don't widen any agent's tool list without reviewing what it reads.
 
-This plugin is a community-maintained set of instructions for an AI assistant. It supports research, information gathering, issue identification and the preparation of drafts and summaries. Neither the maintainer nor Anthropic is acting as, or holding itself out as, a financial adviser, investment manager, pension transfer specialist or any other regulated person.
+</details>
+
+## Important information
+
+**For use by professionals at FCA-authorised firms only.** This plugin is a community-maintained set of instructions for an AI assistant. It supports research, information gathering, issue identification and the preparation of drafts and summaries. Neither the maintainer nor Anthropic is acting as, or holding itself out as, a financial adviser, investment manager, pension transfer specialist or any other regulated person.
 
 The plugin does not give financial, investment, pension, tax or legal advice or personal recommendations. It does not assess suitability or appropriateness and does not make decisions on behalf of clients. It does not execute transactions, submit transfers or letters of authority, complete nomination forms, or sign or verify a fact-find on a client's behalf. It does not take account of any individual's circumstances beyond what the adviser chooses to supply for a specific task.
 
-Outputs are generated by AI and may contain errors, omissions or outdated information, including outdated regulatory and tax references. Outputs must be independently reviewed and must not be relied on as the sole basis for advice, a suitability report, a financial promotion approval or any client-facing decision. Firms and individuals remain solely responsible for the advice they give, for their obligations under the FCA Handbook (including the Consumer Duty and SM&CR), for record keeping, and for their firm's or network's own sign-off processes. Content from third-party providers remains subject to those providers' terms.
+Outputs are generated by AI and may contain errors, omissions or outdated information, including outdated regulatory and tax references. Outputs must be independently reviewed and must not be relied on as the sole basis for advice, a suitability report, a financial promotion approval or any client-facing decision. Firms and individuals remain solely responsible for the advice they give, for their obligations under the FCA Handbook (including the Consumer Duty and SM&CR), for data protection, for record keeping, and for their firm's or network's own sign-off processes. Content from third-party providers remains subject to those providers' terms.
 
 ## Licence
 
